@@ -8,9 +8,22 @@ namespace Intergral
 {
     public class IntegralC:Ifoda
     {
-        public override double Computation(string resaltString, double x)
+        public double a { get; set; }
+        public double b { get; set; }
+        public IntegralC(double _a = 0, double _b=0)
         {
-            return base.Computation(CalculIntegral(resaltString), x);   
+            this.a = _a;
+            this.b = _b;
+        }
+        public override double Computation(string resaltString, double x=0)
+        {
+            return base.Computation(resaltString:null, x:ResultIntegral(resaltString));   
+        }
+        // ifodani [a,b] oraliqdagi natijasi:
+        public double ResultIntegral(string resaltString)
+        {
+            string res = CalculIntegral(resaltString);
+            return Calcul(res, b) - Calcul(res, a);
         }
         // a*x^n+b*x^n-1 ......+c*x^0 ko'rnishdagi ifoda uchun Integralni xisoblash
         public string CalculIntegral(string _ifoda)
@@ -23,7 +36,7 @@ namespace Intergral
                 if (bolak[i].Length > 0) result +="+"+ CalculPieceIntegral(bolak[i]);
             }
             result = result.Trim('+');
-            Console.WriteLine("Ifodaning integral qiymati: "+result);
+            Console.WriteLine("Ifodaning integral qiymati f(x)={0} ",result);
             return result;
         }
         // bo'lak uchun ajratilgan massiv

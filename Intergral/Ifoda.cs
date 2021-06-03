@@ -10,8 +10,9 @@ namespace Intergral
     {
         public string ifoda { get; set; }
         public double x { get; set; }
-        public virtual double Computation(string resaltString,double x) 
+        public virtual double Computation(string resaltString=null,double x=0) 
         {
+            if (resaltString == null) return x; 
             return Calcul(resaltString,x);
         }
         // a*x^n+b*x^n-1 ......+c*x^0 ko'rnishdagi ifodani x=a dagi qiymatini topadi:
@@ -25,7 +26,7 @@ namespace Intergral
             {
                 if(bolak[i].Length>0) result += CalculPiece(bolak[i]);
             }
-            Console.WriteLine("Ushbu ifodaning x={0} qiymatda f(x)={1} ga teng",x,result);
+            Console.WriteLine(" x={0} | f(x)={1} ",x,result);
             return result;
         }
         // bo'lak uchun ajratilgan massiv
